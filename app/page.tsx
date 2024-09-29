@@ -22,6 +22,7 @@ export default function App() {
   }
 
   useEffect(() => {
+    throw new Error("Simulated 500 error");
     listTodos();
   }, []);
 
