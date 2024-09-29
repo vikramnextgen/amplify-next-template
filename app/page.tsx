@@ -22,8 +22,16 @@ export default function App() {
   }
 
   useEffect(() => {
-    throw new Error("Simulated 500 error");
-    listTodos();
+    const simulateError = async () => {
+      const response = await fetch('/api/simulate-error');
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+    };
+
+    simulateError().catch((error) => {
+      console.error("Simulated server error:", error);
+    });
   }, []);
 
   function createTodo() {
